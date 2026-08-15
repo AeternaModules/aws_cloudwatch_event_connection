@@ -8,7 +8,7 @@ output "cloudwatch_event_connections_arn" {
 }
 output "cloudwatch_event_connections_auth_parameters" {
   description = "Map of auth_parameters values across all cloudwatch_event_connections, keyed the same as var.cloudwatch_event_connections"
-  value       = { for k, v in aws_cloudwatch_event_connection.cloudwatch_event_connections : k => v.auth_parameters if v.auth_parameters != null && length(v.auth_parameters) > 0 }
+  value       = { for k, v in aws_cloudwatch_event_connection.cloudwatch_event_connections : k => one(v.auth_parameters) if v.auth_parameters != null && length(v.auth_parameters) > 0 }
   sensitive   = true
 }
 output "cloudwatch_event_connections_authorization_type" {
@@ -21,7 +21,7 @@ output "cloudwatch_event_connections_description" {
 }
 output "cloudwatch_event_connections_invocation_connectivity_parameters" {
   description = "Map of invocation_connectivity_parameters values across all cloudwatch_event_connections, keyed the same as var.cloudwatch_event_connections"
-  value       = { for k, v in aws_cloudwatch_event_connection.cloudwatch_event_connections : k => v.invocation_connectivity_parameters if v.invocation_connectivity_parameters != null && length(v.invocation_connectivity_parameters) > 0 }
+  value       = { for k, v in aws_cloudwatch_event_connection.cloudwatch_event_connections : k => one(v.invocation_connectivity_parameters) if v.invocation_connectivity_parameters != null && length(v.invocation_connectivity_parameters) > 0 }
 }
 output "cloudwatch_event_connections_kms_key_identifier" {
   description = "Map of kms_key_identifier values across all cloudwatch_event_connections, keyed the same as var.cloudwatch_event_connections"
